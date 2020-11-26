@@ -6,17 +6,28 @@
                     - for (let i = 0; i < 12; i++)
                         div
 
-        .nav
+        .burger(v-if="!nav", @click="showMenu")
+        .nav(v-if="nav")
             .nav-head
                 h2.nav-head__text Menu
-                span.nav-head__icon &times;
+                span(@click="showMenu").nav-head__icon &times;
 
             ul.nav-list
                 li.nav-list__item
-                    router-link(tag="a" exact :to="'/'" active-class="active").nav-list__link main
+                    router-link(
+                    tag="a"
+                    exact
+                    :to="'/'"
+                    active-class="active"
+                    ).nav-list__link main
 
                 li.nav-list__item
-                    router-link(tag="a" exact :to="'/country'" active-class="active").nav-list__link country
+                    router-link(
+                    tag="a"
+                    exact
+                    :to="'/country'"
+                    active-class="active"
+                    ).nav-list__link country
 
         .wrapper
             router-view
@@ -25,7 +36,17 @@
 
 <script>
   export default {
-    name: 'App'
+    name: 'App',
+    data() {
+      return {
+        nav: true
+      }
+    },
+    methods: {
+      showMenu(e) {
+        this.nav = !this.nav
+      }
+    }
   }
 </script>
 
@@ -127,6 +148,47 @@
 
         .active {
             border-bottom: 2px solid #fff;
+        }
+    }
+
+    .burger {
+        position: fixed;
+        top: 30px;
+        left: 30px;
+        width: 40px;
+        height: 40px;
+        z-index: 101;
+        background: #fff;
+        border: 1px solid #4f697e;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        opacity: .5;
+        transition: opacity .3s;
+        
+        &:hover {
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity .3s;
+        }
+
+        &::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 2px;
+            background: #4f697e;
+        }
+
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 2px;
+            background: #4f697e;
+            margin-bottom: 5px;
         }
     }
 </style>
