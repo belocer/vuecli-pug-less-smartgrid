@@ -1,8 +1,8 @@
 <template lang="pug">
     .wrap
-        h1.header1 1 page
-        h2.header2 1 page
-        h3.header3 1 page
+        h1.header1 1 adaptive block
+        h2.header2 2 adaptive block
+        h3.header3 3 adaptive block
         .wrap-form
             form-auth
 </template>
@@ -19,6 +19,9 @@
     },
     components: {
       FormAuth
+    },
+    mounted() {
+      console.log('%c Старший разработчик проекта: Белоцерковец Денис Викторович | Email: belocerkovecden@gmail.com', 'background: #38444c; color: #EFF1F2; padding: 30px 40px;');
     }
   }
 </script>
@@ -53,7 +56,7 @@
         margin-top: 30px;
         height: 100px;
         background: #a061a8;
-        font-size: 3rem;
+        font-size: 2rem;
         .col();
         .size(4);
         .size-lg(6);
@@ -64,7 +67,7 @@
         margin-top: 30px;
         height: 100px;
         background: #1d8fbc;
-        font-size: 3rem;
+        font-size: 2rem;
         .col();
         .size(4);
         .size-lg(6);
@@ -75,7 +78,7 @@
         margin-top: 30px;
         height: 100px;
         background: #b24842;
-        font-size: 3rem;
+        font-size: 2rem;
         .col();
         .size(4);
         .size-lg(12);

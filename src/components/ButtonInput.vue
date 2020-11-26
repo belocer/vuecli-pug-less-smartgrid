@@ -1,9 +1,8 @@
 <template lang="pug">
-    input(
-    type="button",
+    button(
+    :type="type",
     name="button",
-    slot="title",
-    :value="title").inp-btn
+    ).inp-btn {{ title }}
 </template>
 
 <script>
@@ -14,6 +13,10 @@
         type: String,
         default: 'Кнопка'
       },
+      type: {
+        type: String,
+        default: 'button'
+      },
     },
     data() {
       return {}
@@ -21,10 +24,10 @@
   }
 </script>
 
-<style lang="less">
+<style scoped lang="less">
     @import './../assets/smart-grid.less';
 
-    .inp-btn {
+    button.inp-btn {
         box-sizing: border-box;
         width: 100%;
         padding: 10px 0;

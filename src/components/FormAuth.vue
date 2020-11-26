@@ -4,6 +4,7 @@
         input(type="email" name="email" placeholder="E-mail").inp
         input(type="password" name="password" placeholder="Password").inp
         button-input(
+        type="submit"
         title="Отправить"
         )
 </template>
