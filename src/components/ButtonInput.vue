@@ -2,10 +2,12 @@
     button(
     :type="type",
     name="button",
+    @click.prevent="showCsl"
     ).inp-btn {{ title }}
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
 
   export default {
     props: {
@@ -19,7 +21,17 @@
       },
     },
     data() {
-      return {}
+      return {
+        str: {
+          technology: 'Vuexxx'
+        }
+      }
+    },
+    methods: {
+      ...mapMutations(['csl']),
+      showCsl(e) {
+        this.csl({...this.str})
+      }
     }
   }
 </script>

@@ -39,7 +39,7 @@
     name: 'App',
     data() {
       return {
-        nav: true
+        nav: false
       }
     },
     methods: {
