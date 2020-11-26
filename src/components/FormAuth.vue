@@ -35,6 +35,11 @@
         .col();
         .size(4);
         .shift-left(4);
+        .size-md(6);
+        .shift-md-left(3);
+        .sm(max-width, 100%);
+        .size-sm(12);
+        .shift-sm-left(0);
 
         .inp {
             box-sizing: border-box;

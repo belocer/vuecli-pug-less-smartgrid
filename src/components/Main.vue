@@ -38,6 +38,7 @@
     .wrap {
         .row-flex();
         justify-content: space-between;
+        position: relative;
     }
 
     h1, h2, h3 {
