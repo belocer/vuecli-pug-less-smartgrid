@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 import Сountry from '@/components/Сountry'
+import Cart from '@/components/Cart'
 import error404 from '@/components/404'
 
 Vue.use(Router)
@@ -17,7 +18,17 @@ export default new Router({
     {
       path: '/country',
       name: 'Country',
-      component: Сountry
+      component: Сountry,
+      beforeEnter (to, from, next) {
+        console.log('beforeEnter')
+        //this.nav = false
+        next()
+      }
+    },
+    {
+      path: '/cart/:qty',
+      name: 'Cart',
+      component: Cart
     },
     {
       path: '*',

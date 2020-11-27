@@ -1,6 +1,6 @@
 <template lang="pug">
     .wrap
-        h1 Список стран
+        h1 Поиск по странам
 
         input(
         type="text",
@@ -9,7 +9,10 @@
         ).inp-query
 
         ul(v-if="foundCountries.length").list-country
-            li(v-for="country in foundCountries").list-country__item {{ country }}
+            li(v-for="country in foundCountries").list-country__item
+                span.list-country__name {{ country }}
+                button(addCart).add-to-cart +
+
 
 </template>
 
@@ -22,7 +25,7 @@
         AuthToken: "f03eaf67f130604830ff3da5dcb30b0123bc0225",
         countries: null,
         foundCountries: [],
-        query: ''
+        query: '',
       }
     },
     methods: {
@@ -32,6 +35,9 @@
           this.foundCountries= this.countries.filter(elem => elem.toUpperCase().indexOf(query_str) > -1)
         }
       },
+      addCart () {
+        console.log(1);
+      }
     },
     mounted() {
       const options = {
@@ -90,12 +96,13 @@
 
         .list-country__item {
             text-align: center;
-            display: inline-block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border: 1px solid crimson;
             border-radius: 3px;
             background: rgba(159, 20, 42, 0.46);
             padding: 5px;
-            color: #fff;
             transition: background .2s;
             .col();
             .size(2);
@@ -104,6 +111,33 @@
                 transition: background .2s;
                 background: firebrick;
             }
+
+            .list-country__name {
+                color: #fff;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .add-to-cart {
+        background: #00a820;
+        border-radius: 50%;
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        transition: background, transform .2s;
+        border: 2px solid #fff;
+        outline: none;
+        font-weight: bold;
+        font-size: 1.5rem;
+        text-align: center;
+        line-height: 24px;
+
+        &:hover {
+            transition: background, transform .2s;
+            background: #008f21;
+            transform: rotate(360deg);
+            cursor: pointer;
         }
     }
 

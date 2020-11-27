@@ -10,10 +10,16 @@ export const store = new Vuex.Store({
     todos
   },
   state: {
-
+    nav: false,
+    countCart: 0,
   },
   mutations: {
-
+    showMenu(state) {
+      state.nav = true
+    },
+    closeMenu(state) {
+      state.nav = false
+    }
   },
   getters: {
 
