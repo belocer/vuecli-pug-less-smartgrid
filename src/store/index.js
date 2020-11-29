@@ -12,6 +12,8 @@ export const store = new Vuex.Store({
   state: {
     nav: false,
     countCart: 0,
+    exercise: 1,
+    dataTraining: []
   },
   mutations: {
     showMenu(state) {
@@ -22,7 +24,10 @@ export const store = new Vuex.Store({
     }
   },
   getters: {
-
+    getDataTraining(state) {
+      state.dataTraining = require("./../data/data-trainig.json")
+      return state.dataTraining
+    }
   },
   actions: {
 

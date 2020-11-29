@@ -1,10 +1,10 @@
 <template lang="pug">
     #app
-        .debug
-            div
-                div
-                    - for (let i = 0; i < 12; i++)
-                        div
+        <!--.debug-->
+            <!--div-->
+                <!--div-->
+                    <!-- - for (let i = 0; i < 12; i++)-->
+                        <!--div-->
 
         .burger(v-if="!nav", @click="showMenus")
 
@@ -72,13 +72,12 @@
 
     .burger {
         position: fixed;
-        top: 30px;
-        left: 30px;
+        top: 10px;
+        left: 20px;
         width: 40px;
         height: 40px;
         z-index: 101;
         background: #fff;
-        border: 1px solid #4f697e;
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -96,18 +95,18 @@
         &::after {
             content: '';
             display: inline-block;
-            width: 30px;
-            height: 2px;
+            width: 25px;
+            height: 1px;
             background: #4f697e;
         }
 
         &::before {
             content: '';
             display: inline-block;
-            width: 30px;
-            height: 2px;
+            width: 25px;
+            height: 1px;
             background: #4f697e;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
     }
 </style>

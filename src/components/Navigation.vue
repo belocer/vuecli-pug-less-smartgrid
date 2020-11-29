@@ -28,6 +28,14 @@
                 :to="{name: 'Cart', params: {qty: qty}}"
                 active-class="active"
                 ).nav-list__link cart {{ qty }}
+
+            li.nav-list__item
+                router-link(
+                tag="a"
+                exact
+                :to="{name: 'Training', params: {exercise: exercis}}"
+                active-class="active"
+                ).nav-list__link training {{ exercis }}
 </template>
 
 <script>
@@ -35,14 +43,12 @@
 
   export default {
     data() {
-      return {
-      }
+      return {}
     },
     methods: {
       ...mapMutations(['showMenu', 'closeMenu']),
       showMenus() {
         this.showMenu()
-        //this.closeNav()
       },
       closeMenus() {
         this.closeMenu()
@@ -51,10 +57,13 @@
     mounted() {
     },
     computed: {
-      ...mapState(['countCart']),
+      ...mapState(['countCart', 'exercise']),
       qty() {
         return this.countCart
       },
+      exercis() {
+        return this.exercise
+      }
     }
   }
 </script>
@@ -63,16 +72,17 @@
     @import './../assets/smart-grid.less';
 
     .nav {
-        background: #aaa;
+        background: #dbdbdb;
         width: 300px;
         height: 100vh;
         position: fixed;
         left: 0;
         top: 0;
         z-index: 100;
+        box-shadow: 30px 30px 90px rgba(50,50,50, .3);
 
         .nav-head {
-            background: #999;
+            background: #bfbfbf;
             padding: 30px;
             display: flex;
             justify-content: space-between;

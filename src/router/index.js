@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import Сountry from '@/components/Сountry'
 import Cart from '@/components/Cart'
+import Training from '@/components/Training'
 import error404 from '@/components/404'
 
 Vue.use(Router)
@@ -29,6 +30,11 @@ export default new Router({
       path: '/cart/:qty',
       name: 'Cart',
       component: Cart
+    },
+    {
+      path: '/training/:exercise',
+      name: 'Training',
+      component: Training
     },
     {
       path: '*',
