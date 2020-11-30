@@ -82,6 +82,7 @@
         color: #2a2a2a;
         border: none;
         outline: none;
+        background: #fff;
 
         .col();
         .size(6);

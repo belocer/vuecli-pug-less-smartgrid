@@ -1,38 +1,37 @@
 <template lang="pug">
     .main
 
-        h1.main-header Упражнение № {{ idTraining }}
+        h1.main-header Упражнение № {{ $route.params.exercise }}
         h2.second-header
             span.second-header__title тема: "{{ dataT[getExercise].mainTitle }}"
 
         .content
             .wrap-progress-linear
-                v-progress-linear(v-model="valueDeterminate" height="10")
+                v-progress-linear(v-model="valueDeterminateC" height="10")
 
             .wrapInfoBlock
                 InfoBlock(
-                :title="dataT[getExercise].title",
-                :text="dataT[getExercise].text",
-                :codeText="dataT[getExercise].code"
+                :title="dataT[$route.params.exercise - 1].title",
+                :text="dataT[$route.params.exercise - 1].text",
+                :codeText="dataT[$route.params.exercise - 1].code"
                 )
 
             codemirror(
             ref="myCm",
-            :value="code",
+            :value="codes",
             :options="cmOptions",
-            @ready="onCmReady",
-            @focus="onCmFocus",
             @input="onCmCodeChange"
             )#myTextArea
 
-            #panel-html(v-model="resultCode")
+            #panel-html(v-html="resultCode")
 
             .wrap-btn
                 v-btn(
                 block
-                elevation="16"
                 large
-                x-large
+                depressed
+                :disabled="btnNext",
+                @click="showNext()"
                 ) Следующее упражнение
 </template>
 
@@ -47,7 +46,7 @@
     data () {
       return {
         resultCode: '',
-        code: '',
+        codes: '',
         cmOptions: {
           tabSize: 2,
           mode: 'text/x-vue',
@@ -55,26 +54,58 @@
           theme: 'base16-dark',
           line: true,
         },
-        valueDeterminate: 66,
+        valueDeterminate: 100,
         dataT: null,
         idTraining: 0,
+        btnNext: true
       }
     },
     methods: {
       ...mapGetters(['getDataTraining']),
+      ...mapMutations(['thisExercisePlus']),
       visibleHTML() {
         this.resultCode = this.codemirror.getValue('')
       },
-      onCmReady(cm) {
-        console.log('the editor is readied!', cm)
-      },
-      onCmFocus(cm) {
-        console.log('the editor is focus!', cm)
+      showNext() {
+        this.$router.push({name: 'Training', params: {exercise: this.exercis}})
+        document.location.reload();
       },
       onCmCodeChange(newCode) {
         this.code = newCode
         this.resultCode = this.codemirror.getValue('')
-        this.visibleHTML()
+        let newString = this.resultCode.split(' ').join('')
+        newString = func_nbsp(newString, ' ')
+        function func_nbsp (newString, del_symbol) {
+          newString = newString.split(del_symbol).join('')
+          if (newString.indexOf(del_symbol) > -1) {
+            func_nbsp(newString, del_symbol)
+          }
+          return newString
+        }
+
+        newString = newString.split('\t').join('')
+        newString = func_nbsp(newString, '\t')
+        newString = newString.split('\n').join('')
+        newString = func_nbsp(newString, '\n')
+
+        let start_container = newString.indexOf('<span>')
+        let stop_container = newString.indexOf('</span>')
+        let container = newString.substring(start_container, stop_container + 7)
+        container = container.split(':').join(': ')
+
+        let start_func = newString.indexOf('{msg:');
+        let stop_func = newString.indexOf('}<\/script>');
+        let func = newString.substring(start_func, stop_func)
+        let msg = eval(func.substring(0, func.length - 1))
+
+        if (container.indexOf('{{msg}}') > -1) this.btnNext = false
+
+        let re = `/${msg}/gi`;
+        let newstr = container.replace(re, '{{msg}}');
+        this.resultCode = newstr.split('{{msg}}').join(msg)
+      },
+      plusExercise(){
+        this.thisExercisePlus()
       }
     },
     computed: {
@@ -85,6 +116,13 @@
       },
       codemirror() {
         return this.$refs.myCm.codemirror
+      },
+      exercis() {
+        this.plusExercise()
+        return this.exercise
+      },
+      valueDeterminateC() {
+        return this.valueDeterminate - Math.ceil((100 / this.dataT.length) * this.$route.params.exercise)
       }
     },
     components: {
@@ -93,8 +131,8 @@
     },
     created() {
       this.dataT = this.getDataTraining();
-      this.code = this.dataT[this.getExercise].codeForExercise
-      this.cmOptions.modev = this.dataT[this.getExercise].mode
+      this.codes = this.dataT[this.$route.params.exercise - 1].codeForExercise
+      this.cmOptions.modev = this.dataT[this.$route.params.exercise - 1].mode
     }
   }
 </script>
@@ -173,6 +211,7 @@
         border: 1px solid #afafaf;
         border-radius: 3px;
         outline: none;
+        padding: 5px 10px;
         .col();
         .size(6);
 
@@ -205,8 +244,8 @@
         .size(12);
 
         button {
-            background: #42b983;
-            color: #fff;
+            background: #42b983 !important;
+            color: #fff !important;
         }
     }
 </style>

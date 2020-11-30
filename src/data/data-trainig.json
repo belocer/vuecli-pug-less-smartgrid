@@ -6,12 +6,21 @@
     "text": "Наиболее простой способ связывания данных — это текстовая интерполяция с использованием синтаксиса Mustache (двойных фигурных скобок):",
     "code": "<span>Сообщение: {{ msg }}</span>",
     "mode": "text/html",
-    "codeForExercise": "<template>\n\t<span>Сообщение: </span> \n</template> \n\n <script> \n\texport default {\n\t\tdata() { \n\t\t\treturn { \n\t\t\t\tmsg: 'Hi, Loftschool!' \n\t\t\t}\n\t\t} \n\t} \n</script>"
+    "codeForExercise": "<template>\n\t<span>Сообщение: </span> \n</template> \n\n <script> \n\texport default {\n\t\tdata() { \n\t\t\treturn { \n\t\t\t\tmsg: 'Hello!' \n\t\t\t}\n\t\t} \n\t} \n</script>"
   },
   {
     "id": 2,
     "mainTitle": "Интерполяция HTML кода",
     "title": "Сырой HTML",
+    "text": "Значение выражения в двойных фигурных скобках подставляется как простой текст, а не как HTML. Для кода HTML необходимо использовать директиву v-html:",
+    "code": "<p>Директива v-html: <span v-html=\"rawHtml\"></span></p>",
+    "mode": "text/html",
+    "codeForExercise": "<template>\n\t<p>Директива <span></span></p>\n</template>\n<script> \n\texport default {\n\t\tdata() { \n\t\t\treturn { \n\t\t\t\tmsg: '<a href=\"https://loftschool.com/\" target=\"_blank\">Hi, Loftschool!</a>' \n\t\t\t}\n\t\t} \n\t} \n</script>"
+  },
+  {
+    "id": 3,
+    "mainTitle": "Интерполяция 3",
+    "title": "Сырой HTML 3",
     "text": "Значение выражения в двойных фигурных скобках подставляется как простой текст, а не как HTML. Для кода HTML необходимо использовать директиву v-html:",
     "code": "<p>Директива v-html: <span v-html=\"rawHtml\"></span></p>",
     "mode": "text/html",

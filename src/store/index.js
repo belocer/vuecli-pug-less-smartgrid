@@ -21,15 +21,16 @@ export const store = new Vuex.Store({
     },
     closeMenu(state) {
       state.nav = false
+    },
+    thisExercisePlus(state) {
+      state.exercise = state.exercise + 1
     }
   },
   getters: {
     getDataTraining(state) {
-      state.dataTraining = require("./../data/data-trainig.json")
+      state.dataTraining = require('./../data/data-trainig.json')
       return state.dataTraining
     }
   },
-  actions: {
-
-  }
+  actions: {}
 })
