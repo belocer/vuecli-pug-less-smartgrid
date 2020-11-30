@@ -57,6 +57,7 @@
             margin: 20px 0;
             line-height: 1.2;
             position: relative;
+            width: 100%;
 
             &:before {
                 content: "#";

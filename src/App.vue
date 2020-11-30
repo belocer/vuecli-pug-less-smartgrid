@@ -106,7 +106,7 @@
             width: 25px;
             height: 1px;
             background: #4f697e;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
     }
 </style>

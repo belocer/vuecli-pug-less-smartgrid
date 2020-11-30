@@ -3,7 +3,7 @@
 
         h1.main-header Упражнение № {{ $route.params.exercise }}
         h2.second-header
-            span.second-header__title тема: "{{ dataT[getExercise].mainTitle }}"
+            span.second-header__title тема: "{{ dataT[$route.params.exercise - 1].mainTitle }}"
 
         .content
             .wrap-progress-linear
@@ -68,7 +68,10 @@
       },
       showNext() {
         this.$router.push({name: 'Training', params: {exercise: this.exercis}})
-        document.location.reload();
+        //location.reload()
+        this.dataT = this.getDataTraining();
+        this.codes = this.dataT[this.$route.params.exercise - 1].codeForExercise
+        this.cmOptions.modev = this.dataT[this.$route.params.exercise - 1].mode
       },
       onCmCodeChange(newCode) {
         this.code = newCode
@@ -87,22 +90,73 @@
         newString = func_nbsp(newString, '\t')
         newString = newString.split('\n').join('')
         newString = func_nbsp(newString, '\n')
+        
+        if(this.dataT[this.$route.params.exercise - 1].id === 1) {
+          let start_container = newString.indexOf('<span>')
+          let stop_container = newString.indexOf('</span>')
+          let container = newString.substring(start_container, stop_container + 7)
+          container = container.split(':').join(': ')
 
-        let start_container = newString.indexOf('<span>')
-        let stop_container = newString.indexOf('</span>')
-        let container = newString.substring(start_container, stop_container + 7)
-        container = container.split(':').join(': ')
+          let start_func = newString.indexOf('{msg:');
+          let stop_func = newString.indexOf('}<\/script>');
+          let func = newString.substring(start_func, stop_func)
+          let msg = eval(func.substring(0, func.length - 1))
 
-        let start_func = newString.indexOf('{msg:');
-        let stop_func = newString.indexOf('}<\/script>');
-        let func = newString.substring(start_func, stop_func)
-        let msg = eval(func.substring(0, func.length - 1))
+          if (container.indexOf('{{msg}}') > -1) this.btnNext = false
 
-        if (container.indexOf('{{msg}}') > -1) this.btnNext = false
+          let re = `/${msg}/gi`;
+          let newstr = container.replace(re, '{{msg}}');
+          this.resultCode = newstr.split('{{msg}}').join(msg)
+        }
 
-        let re = `/${msg}/gi`;
-        let newstr = container.replace(re, '{{msg}}');
-        this.resultCode = newstr.split('{{msg}}').join(msg)
+        if(this.dataT[this.$route.params.exercise - 1].id === 2) {
+          //console.log(this.dataT[this.$route.params.exercise - 1].id);
+          let start_container = newString.indexOf('<p>')
+          let stop_container = newString.indexOf('</p>')
+          let container = newString.substring(start_container, stop_container + 4)
+          container = container.split('ва<s').join('ва <s')
+
+          console.log(container);
+          
+          let start_func = newString.indexOf('{linkTag:');
+          let stop_func = newString.indexOf('}<\/script>');
+          let func = newString.substring(start_func, stop_func)
+          let msg = eval(func.substring(0, func.length - 1))
+          console.log(msg);
+          msg = msg.split('ahref').join('a href')
+          msg = msg.split('com/"t').join('com/" t')
+
+          if (newString.indexOf('v-html="linkTag"') > -1) this.btnNext = false
+
+          let re = `/${msg}/gi`;
+          let newstr = container.replace(re, '{{linkTag}}');
+          this.resultCode = newstr.split('<spanv-html="linkTag"></span>').join('<a href="https://loftschool.com/" target="_blank">Loftschool</a>')
+        }
+
+        if(this.dataT[this.$route.params.exercise - 1].id === 3) {
+          //console.log(this.dataT[this.$route.params.exercise - 1].id);
+          let start_container = newString.indexOf('<p>')
+          let stop_container = newString.indexOf('</p>')
+          let container = newString.substring(start_container, stop_container + 4)
+          container = container.split('ва<s').join('ва <s')
+
+          console.log(container);
+
+          let start_func = newString.indexOf('{linkTag:');
+          let stop_func = newString.indexOf('}<\/script>');
+          let func = newString.substring(start_func, stop_func)
+          let msg = eval(func.substring(0, func.length - 1))
+          console.log(msg);
+          msg = msg.split('ahref').join('a href')
+          msg = msg.split('com/"t').join('com/" t')
+
+          if (newString.indexOf('v-html="linkTag"') > -1) this.btnNext = false
+
+          let re = `/${msg}/gi`;
+          let newstr = container.replace(re, '{{linkTag}}');
+          this.resultCode = newstr.split('<spanv-html="linkTag"></span>').join('<a href="https://loftschool.com/" target="_blank">Loftschool</a>')
+        }
+
       },
       plusExercise(){
         this.thisExercisePlus()
@@ -169,6 +223,8 @@
         margin-top: 20px;
         margin-bottom: 10px;
         background: rgba(66, 185, 131, 0.48);
+        border-radius: 3px;
+        overflow: hidden;
         .col();
         .size(12);
     }
@@ -202,6 +258,7 @@
 
     .wrapInfoBlock {
         margin-bottom: 20px;
+        width: 100%;
     }
 
     #panel-html {

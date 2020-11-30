@@ -13,17 +13,17 @@
     "mainTitle": "Интерполяция HTML кода",
     "title": "Сырой HTML",
     "text": "Значение выражения в двойных фигурных скобках подставляется как простой текст, а не как HTML. Для кода HTML необходимо использовать директиву v-html:",
-    "code": "<p>Директива v-html: <span v-html=\"rawHtml\"></span></p>",
+    "code": "<p>Директива v-html: <span v-html=\"linkTag\"></span></p>",
     "mode": "text/html",
-    "codeForExercise": "<template>\n\t<p>Директива <span></span></p>\n</template>\n<script> \n\texport default {\n\t\tdata() { \n\t\t\treturn { \n\t\t\t\tmsg: '<a href=\"https://loftschool.com/\" target=\"_blank\">Hi, Loftschool!</a>' \n\t\t\t}\n\t\t} \n\t} \n</script>"
+    "codeForExercise": "<template>\n\t<p>Директива&nbsp;v-html:&nbsp;<span></span></p>\n</template>\n<script> \n\texport default {\n\t\tdata() { \n\t\t\treturn { \n\t\t\t\tlinkTag: '<a href=\"https://loftschool.com/\" target=\"_blank\">Loftschool</a>' \n\t\t\t}\n\t\t} \n\t} \n</script>"
   },
   {
     "id": 3,
-    "mainTitle": "Интерполяция 3",
-    "title": "Сырой HTML 3",
-    "text": "Значение выражения в двойных фигурных скобках подставляется как простой текст, а не как HTML. Для кода HTML необходимо использовать директиву v-html:",
-    "code": "<p>Директива v-html: <span v-html=\"rawHtml\"></span></p>",
+    "mainTitle": "Работа с пользовательским вводом",
+    "title": "v-model",
+    "text": "Vue также предоставляет директиву v-model, позволяющую легко связывать элементы форм и состояние приложения:",
+    "code": "<p>Директива&nbsp;v-model:&nbsp;<span v-model=\"msg\"></span></p>",
     "mode": "text/html",
-    "codeForExercise": "<template>\n\t<p>Директива <span></span></p>\n</template>\n<script> \n\texport default {\n\t\tdata() { \n\t\t\treturn { \n\t\t\t\tmsg: '<a href=\"https://loftschool.com/\" target=\"_blank\">Hi, Loftschool!</a>' \n\t\t\t}\n\t\t} \n\t} \n</script>"
+    "codeForExercise": "<template>\n\t<p>Директива&nbsp;v-model:&nbsp;<span></span></p>\n</template>\n<script> \n\texport default {\n\t\tdata() { \n\t\t\treturn { \n\t\t\t\tmsg: 'some text' \n\t\t\t}\n\t\t} \n\t} \n</script>"
   }
 ]

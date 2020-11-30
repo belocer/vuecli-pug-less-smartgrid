@@ -34,13 +34,7 @@ export default new Router({
     {
       path: '/training/:exercise',
       name: 'Training',
-      component: Training,
-      beforeRouteLeave (to, fromR, next) { // При загрузке данной страницы
-        console.log('beforeRouteEnter')
-        next(true)
-        console.log(this.codes);
-        this.codes = this.dataT[1].codeForExercise
-      },
+      component: Training
     },
     {
       path: '*',
